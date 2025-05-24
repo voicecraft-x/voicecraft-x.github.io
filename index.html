@@ -6,13 +6,124 @@
 	<meta name="generator" content="Hugo 0.88.1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="css/normalize.css">
 
 	<title>VoiceCraft-X</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		:root {
+			--primary-color: #2196F3;
+			--text-color: #333;
+			--border-color: #e0e0e0;
+			--background-color: #ffffff;
+			--card-background: #f8f9fa;
+			--highlight-color: #f0f7ff;
+		}
 
+		.section-title {
+			font-size: 1.8rem;
+			font-weight: 600;
+			color: var(--text-color);
+			margin-bottom: 1.5rem;
+			text-align: center;
+		}
+
+		.model-tabs {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 2rem;
+			border-bottom: 1px solid var(--border-color);
+		}
+
+		.model-tab {
+			padding: 0.8rem 2rem;
+			font-size: 1rem;
+			font-weight: 500;
+			color: #666;
+			cursor: pointer;
+			border-bottom: 2px solid transparent;
+			margin: 0 1rem;
+		}
+
+		.model-tab.active {
+			color: var(--primary-color);
+			border-bottom-color: var(--primary-color);
+		}
+
+		.model-content {
+			display: none;
+		}
+
+		.model-content.active {
+			display: block;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0;
+			background: var(--background-color);
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+			/* table-layout: fixed; */ /* Can cause issues if content is too wide */
+			margin-bottom: 2rem;
+		}
+
+		th, td {
+			padding: 0.8rem;
+			border-bottom: 1px solid var(--border-color);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+
+		th {
+			background-color: var(--card-background);
+			font-weight: 600;
+			color: var(--text-color);
+			padding: 1rem 0.5rem;
+			white-space: nowrap;
+		}
+
+		td {
+			vertical-align: middle;
+		}
+
+		tr:last-child td {
+			border-bottom: none;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		.voicecraftx {
+			font-weight: 700;
+			color: var(--primary-color);
+			position: relative;
+		}
+
+		td.voicecraftx-cell {
+			background-color: var(--highlight-color);
+		}
+
+		.prompt-cell, .target-cell {
+			font-size: 0.85rem;
+			line-height: 1.4;
+			padding: 0.8rem 0.5rem;
+		}
+
+		audio {
+			width: 150px; /* Adjust as needed */
+			margin: 0.3rem 0;
+		}
+
+		audio::-webkit-media-controls-panel {
+			background-color: var(--card-background);
+		}
+	</style>
 </head>
 
 
@@ -37,20 +148,247 @@
         </p>
         <p><b>ByteDance</b></p> -->
 	</div>
-	<p><b>Abstract.</b> We introduce VoiceCraft-X, an autoregressive neural codec language model achieving unified multilingual speech editing and zero-shot text-to-speech (TTS) synthesis across 11 languages: English, Mandarin, Korean, Japanese, Spanish, French, German, Dutch, Italian, Portuguese, and Polish. VoiceCraft-X utilizes the Qwen3 large language model for phoneme-free cross-lingual text processing and a novel token reordering mechanism with time-aligned text and speech tokens to handle both tasks as a single sequence generation problem. The model generates high-quality, natural-sounding speech, seamlessly creating new audio or editing existing recordings within one framework. VoiceCraft-X shows robust performance in diverse linguistic settings, even with limited per-language data, underscoring the power of unified autoregressive approaches for advancing complex, real-world multilingual speech applications. 
+	<p><b>Abstract.</b> We introduce VoiceCraft-X, an autoregressive neural codec language model which unifies multilingual speech editing and zero-shot Text-to-Speech (TTS) synthesis across 11 languages: English, Mandarin, Korean, Japanese, Spanish, French, German, Dutch, Italian, Portuguese, and Polish. VoiceCraft-X utilizes the Qwen3 large language model for phoneme-free cross-lingual text processing and a novel token reordering mechanism with time-aligned text and speech tokens to handle both tasks as a single sequence generation problem. The model generates high-quality, natural-sounding speech, seamlessly creating new audio or editing existing recordings within one framework. VoiceCraft-X shows robust performance in diverse linguistic settings, even with limited per-language data, underscoring the power of unified autoregressive approaches for advancing complex, real-world multilingual speech applications.
 	</p>
 
 	<p>
 	<b>Contents</b>
       <ul>
-        <li><a href="#model-overview">System Overview</a></li>
         <li><a href="#zero-shot-samples">Zero-shot TTS</a></li>
+        <li><a href="#speech-editing-samples">Speech Editing</a></li>
+        <li><a href="#model-overview">System Overview</a></li>
       </ul>
 	</p>
-
-	
 </div>
 
+
+
+<!-- New Section for Zero-shot TTS Samples with Tabs -->
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded" id="zero-shot-samples">
+    <h2 class="section-title">Zero-shot TTS Samples</h2>
+    <div class='model-tabs'>
+        <div id='english-tab' class='model-tab active' onclick='switchModelTab("english")'>English</div>
+        <div id='chinese-tab' class='model-tab' onclick='switchModelTab("chinese")'>Chinese</div>
+        <div id='spanish-tab' class='model-tab' onclick='switchModelTab("spanish")'>Spanish</div>
+        <!-- Add more language tabs here if needed -->
+    </div>
+
+    <div id='english-content' class='model-content active'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>XTTS-v2</th>
+					<th>VoiceCraft</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Row for English -->
+                <tr>
+                    <td class='prompt-cell'>It is located on a small plain home to many vineyards.</td>
+                    <td class='target-cell'>The society of the day held that reward without labour was misguided.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/1.wav'></audio></td>
+                </tr>
+                <!-- Add more English samples here -->
+				<tr>
+                    <td class='prompt-cell'>Two children, one male and one female are practicing outdoor rock climbing.</td>
+                    <td class='target-cell'>Soldier sitting on top of Jeep holding a machine gun and soldier sitting inside.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/2.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/2.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>Together with his wife he had three daughters.</td>
+                    <td class='target-cell'>He was born to an illustrious family that produced notable people in several fields.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/3.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/3.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>The facade is constructed from white Portland stone and red brick.</td>
+                    <td class='target-cell'>After a routine departure, the airliner experiences sporadic sudden vibrations.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/4.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/4.wav'></audio></td>
+                </tr>
+
+				<tr>
+                    <td class='prompt-cell'>I would have won the Junior Olympics if not for those medaling kids.</td>
+                    <td class='target-cell'>Looking through the telescope, I saw a circle of deep blue and the little round planet.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/5.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/5.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>"There's no danger," the boy said, when they had moved on past the encampment.</td>
+                    <td class='target-cell'>Later, we simply let life proceed, in its own direction, toward its own fate.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/6.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/6.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>Audrey is the stereotypical housewife.</td>
+                    <td class='target-cell'>This paper discusses the power of the Senate to try impeachment cases.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/7.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/7.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>It is well connected by road and rail to Bangalore, Mangalore and Mysore.</td>
+                    <td class='target-cell'>Critics have taken Roney to task for sounding too similar to his idol.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/8.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/8.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>This marked the official beginning of the university as it is today.</td>
+                    <td class='target-cell'>Fox won her next seven fights in a row, with two knockouts.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/9.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/9.wav'></audio></td>
+                </tr>
+				<tr>
+                    <td class='prompt-cell'>When a certain length of time passes, he heads for the palace.</td>
+                    <td class='target-cell'>The village is also the birthplace of the actor John Mills.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/10.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/10.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/10.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/10.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/10.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id='chinese-content' class='model-content active'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>XTTS-v1</th>
+					<th>XTTS-v2</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='prompt-cell'>柏林围墙崩垮后，德国企业在俄国大笔投资。</td>
+                    <td class='target-cell'>本次有害昆虫科普展，是一场专门为孩子准备的科普教育活动。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/1.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- You might want to add a disclaimer section here like in copyfrom.html -->
+    <!-- 
+    <div class='disclaimer' style="text-align: center; margin-top: 2rem;">
+        <p style="font-size: 0.9rem; color: #666; font-style: italic;">* Ground truth audio may contain background noise.</p>
+    </div>
+    -->
+</div>
+
+
+<!-- New Section for Speech Editing Samples with Tabs -->
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded" id="speech-editing-samples">
+    <h2 class="section-title">Speech Editing Samples</h2>
+    <div class='model-tabs'>
+        <div id='english-tab' class='model-tab active' onclick='switchModelTab("english")'>English</div>
+        <div id='chinese-tab' class='model-tab' onclick='switchModelTab("chinese")'>Chinese</div>
+        <div id='spanish-tab' class='model-tab' onclick='switchModelTab("spanish")'>Spanish</div>
+        <!-- Add more language tabs here if needed -->
+    </div>
+
+    <div id='english-content' class='model-content active'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>VoiceCraft</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Row for English -->
+                <tr>
+                    <td class='prompt-cell'>It is located on a small plain home to many vineyards.</td>
+                    <td class='target-cell'>The society of the day held that reward without labour was misguided.</td>
+					<td><audio controls preload='none' src='audios/tts/EN/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/gt/1.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id='chinese-content' class='model-content active'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>XTTS-v1</th>
+					<th>XTTS-v2</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='prompt-cell'>柏林围墙崩垮后，德国企业在俄国大笔投资。</td>
+                    <td class='target-cell'>本次有害昆虫科普展，是一场专门为孩子准备的科普教育活动。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/1.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- You might want to add a disclaimer section here like in copyfrom.html -->
+    <!-- 
+    <div class='disclaimer' style="text-align: center; margin-top: 2rem;">
+        <p style="font-size: 0.9rem; color: #666; font-style: italic;">* Ground truth audio may contain background noise.</p>
+    </div>
+    -->
+</div>
 
 <div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">		
 	<h2 id="model-overview" style="text-align: center;">System Overview</h2>
@@ -59,15 +397,32 @@
 		<img src="pics/overview.svg" alt="System Overview" style="width: 800px; max-width: 100%; height: auto;">
 	</p>
 	</body>
-		<p style="text-align: center;" >
-			<b>Figure 1.</b> An overview of the VoiceCraft-X.
+		<p style="text-align: center; max-width: 750px; margin: auto;" >
+			<b>Figure 1.</b> The training process for the VoiceCraft-X model, which takes text and a speaker embedding as input and is trained to predict sequences of speech tokens. The labels CB1-CB4 represent codec tokens from different codebooks.
 		</p>
 </div>
-
 
 </article>
 </main>
 </div>
+
+<script>
+    function switchModelTab(tabName) {
+        // Hide all content
+        document.querySelectorAll('.model-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // Deactivate all tabs
+        document.querySelectorAll('.model-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Show selected content and activate tab
+        document.getElementById(tabName + '-content').classList.add('active');
+        document.getElementById(tabName + '-tab').classList.add('active');
+    }
+</script>
 
 </body>
 </html>
