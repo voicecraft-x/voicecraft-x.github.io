@@ -32,9 +32,11 @@
 
 		.model-tabs {
 			display: flex;
-			justify-content: center;
+			justify-content: flex-start;
 			margin-bottom: 2rem;
 			border-bottom: 1px solid var(--border-color);
+			overflow-x: auto;
+			white-space: nowrap;
 		}
 
 		.model-tab {
@@ -116,13 +118,31 @@
 		}
 
 		audio {
-			width: 150px; /* Adjust as needed */
+			width: 150px;
 			margin: 0.3rem 0;
 		}
 
 		audio::-webkit-media-controls-panel {
 			background-color: var(--card-background);
 		}
+
+        .interactive-cell {
+            cursor: pointer;
+            position: relative; 
+        }
+        .interactive-cell .toggle-icon {
+            font-size: 0.8em;
+            color: var(--primary-color); 
+            margin-top: 5px;
+            display: block;
+            text-align: center;
+        }
+        .details-cell {
+            background-color: #fdfdfd; 
+        }
+        .details-cell audio {
+            width: 160px; /* Increased width */
+        }
 	</style>
 </head>
 
@@ -156,6 +176,7 @@
       <ul>
         <li><a href="#zero-shot-samples">Zero-shot TTS</a></li>
         <li><a href="#speech-editing-samples">Speech Editing</a></li>
+        <li><a href="#code-switch-samples">Code-Switching</a></li>
         <li><a href="#model-overview">System Overview</a></li>
       </ul>
 	</p>
@@ -169,7 +190,15 @@
     <div class='model-tabs'>
         <div id='english-tab' class='model-tab active' onclick='switchModelTab("english")'>English</div>
         <div id='chinese-tab' class='model-tab' onclick='switchModelTab("chinese")'>Chinese</div>
+        <div id='korean-tab' class='model-tab' onclick='switchModelTab("korean")'>Korean</div>
+        <div id='japanese-tab' class='model-tab' onclick='switchModelTab("japanese")'>Japanese</div>
         <div id='spanish-tab' class='model-tab' onclick='switchModelTab("spanish")'>Spanish</div>
+        <div id='french-tab' class='model-tab' onclick='switchModelTab("french")'>French</div>
+        <div id='german-tab' class='model-tab' onclick='switchModelTab("german")'>German</div>
+        <div id='portuguese-tab' class='model-tab' onclick='switchModelTab("portuguese")'>Portuguese</div>
+        <div id='dutch-tab' class='model-tab' onclick='switchModelTab("dutch")'>Dutch</div>
+        <div id='italian-tab' class='model-tab' onclick='switchModelTab("italian")'>Italian</div>
+        <div id='polish-tab' class='model-tab' onclick='switchModelTab("polish")'>Polish</div>
         <!-- Add more language tabs here if needed -->
     </div>
 
@@ -181,110 +210,118 @@
                     <th>Target Transcription</th>
 					<th>Prompt</th>
 					<th class='voicecraftx'>VoiceCraft-X</th>
-					<th>XTTS-v2</th>
 					<th>VoiceCraft</th>
+					<th>XTTS-v2</th>
                     <th>Ground Truth</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Example Row for English -->
                 <tr>
-                    <td class='prompt-cell'>It is located on a small plain home to many vineyards.</td>
-                    <td class='target-cell'>The society of the day held that reward without labour was misguided.</td>
+                    <td class='prompt-cell'>The Washington Township Public School District serves students in kindergarten through twelfth grade.</td>
+                    <td class='target-cell'>Selected forms are propagated by stem cuttings in Micronesia.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/1.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/1.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/1.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/1.wav'></audio></td>
                 </tr>
-                <!-- Add more English samples here -->
-				<tr>
-                    <td class='prompt-cell'>Two children, one male and one female are practicing outdoor rock climbing.</td>
-                    <td class='target-cell'>Soldier sitting on top of Jeep holding a machine gun and soldier sitting inside.</td>
+
+                <tr>
+                    <td class='prompt-cell'>Youth Congress always remained in highlights of the leading state news.</td>
+                    <td class='target-cell'>He studied the mammalian chronology of the European Eocene and Upper Miocene.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/2.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/2.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/2.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/2.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/2.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>Together with his wife he had three daughters.</td>
-                    <td class='target-cell'>He was born to an illustrious family that produced notable people in several fields.</td>
+
+                <tr>
+                    <td class='prompt-cell'>It is currently the oldest preserved Union Pacific steam locomotive.</td>
+                    <td class='target-cell'>The two quickly covered the table with a towel when they noticed the officers.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/3.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/3.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/3.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/3.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/3.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>The facade is constructed from white Portland stone and red brick.</td>
-                    <td class='target-cell'>After a routine departure, the airliner experiences sporadic sudden vibrations.</td>
+
+                <tr>
+                    <td class='prompt-cell'>He also purchased land to further his orange and grape growing capacity.</td>
+                    <td class='target-cell'>Moreover, a few deities are not easily classifiable under these terms.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/4.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/4.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/4.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/4.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/4.wav'></audio></td>
                 </tr>
 
-				<tr>
-                    <td class='prompt-cell'>I would have won the Junior Olympics if not for those medaling kids.</td>
-                    <td class='target-cell'>Looking through the telescope, I saw a circle of deep blue and the little round planet.</td>
+                <tr>
+                    <td class='prompt-cell'>Approved operators and a scheduled ferry service take people to the island.</td>
+                    <td class='target-cell'>Nicholas Nixon extensively documented issues surrounded by American life.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/5.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/5.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/5.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/5.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/5.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>"There's no danger," the boy said, when they had moved on past the encampment.</td>
-                    <td class='target-cell'>Later, we simply let life proceed, in its own direction, toward its own fate.</td>
+
+                <tr>
+                    <td class='prompt-cell'>High gain is also used to induce audio feedback, which increases sustain dramatically.</td>
+                    <td class='target-cell'>He contributed donations to the new Birmingham University following representations by Joseph Chamberlain.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/6.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/6.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/6.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/6.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/6.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>Audrey is the stereotypical housewife.</td>
-                    <td class='target-cell'>This paper discusses the power of the Senate to try impeachment cases.</td>
+
+                <tr>
+                    <td class='prompt-cell'>The building is now offices.</td>
+                    <td class='target-cell'>Roy is bilingual, and can speak English and French.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/7.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/7.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/7.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/7.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/7.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>It is well connected by road and rail to Bangalore, Mangalore and Mysore.</td>
-                    <td class='target-cell'>Critics have taken Roney to task for sounding too similar to his idol.</td>
+
+                <tr>
+                    <td class='prompt-cell'>Notable among them his works for the estates of Harewood and Wentworth Woodhouse.</td>
+                    <td class='target-cell'>He later transferred to the United States Army Air Corps.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/8.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/8.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/8.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/8.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/8.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>This marked the official beginning of the university as it is today.</td>
-                    <td class='target-cell'>Fox won her next seven fights in a row, with two knockouts.</td>
+
+                <tr>
+                    <td class='prompt-cell'>The Washington Township Public School District serves students in kindergarten through twelfth grade.</td>
+                    <td class='target-cell'>In New Zealand, the rank of superintendent is above inspector and below assistant commissioner.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/9.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/9.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/9.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/9.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/9.wav'></audio></td>
                 </tr>
-				<tr>
-                    <td class='prompt-cell'>When a certain length of time passes, he heads for the palace.</td>
-                    <td class='target-cell'>The village is also the birthplace of the actor John Mills.</td>
+
+                <tr>
+                    <td class='prompt-cell'>Gum arabic is used primarily in the food industry as a stabilizer.</td>
+                    <td class='target-cell'>One variation assigns a point based on the pair rolled, rather than the singleton.</td>
 					<td><audio controls preload='none' src='audios/tts/EN/prompt/10.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/10.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/10.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/voicecraft/10.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/10.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/EN/gt/10.wav'></audio></td>
                 </tr>
+            
             </tbody>
         </table>
     </div>
 
-    <div id='chinese-content' class='model-content active'>
+    <div id='chinese-content' class='model-content'>
         <table>
             <thead>
                 <tr>
@@ -299,98 +336,685 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class='prompt-cell'>柏林围墙崩垮后，德国企业在俄国大笔投资。</td>
-                    <td class='target-cell'>本次有害昆虫科普展，是一场专门为孩子准备的科普教育活动。</td>
+                    <td class='prompt-cell'>可并没有出差错，他们办事有条不稳。</td>
+                    <td class='target-cell'>机场工作人员和驻场武警，连夜在机场跑道上扫雪除冰。</td>
 					<td><audio controls preload='none' src='audios/tts/ZH/prompt/1.wav'></audio></td>
                     <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/1.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/ZH/xtts1/1.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/ZH/xtts2/1.wav'></audio></td>
                     <td><audio controls preload='none' src='audios/tts/ZH/gt/1.wav'></audio></td>
                 </tr>
+                <tr>
+                    <td class='prompt-cell'>本次活动共计收到来自全球，六百余位新人的报名。</td>
+                    <td class='target-cell'>他们都可以证明，蚯蚓王的通讯网站搜索很准，动物界家喻户晓。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/2.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/2.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>深情演绎南北通透洋房空间的，重重重品质内涵。</td>
+                    <td class='target-cell'>市中心发生数百名抗议者沿街，打砸汽车和商铺窗户事件。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/3.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/3.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>顺风时提高警惕，逆风时笃定前行。</td>
+                    <td class='target-cell'>通过调查，将筛选出一批口味，令人消费者满意的产品。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/4.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/4.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>这场小雨让昆明又回到了清寒的温春季。</td>
+                    <td class='target-cell'>二是房地产交易结构，进入以二手房为主的阶段。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/5.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/5.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>时值夏季，北江河中水量充沛，水流湍急。</td>
+                    <td class='target-cell'>全球每年有超过一百三十五万人，因交通事故而死亡。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/6.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/6.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>大象卷起我，像扔皮球一样，扔到大街上。</td>
+                    <td class='target-cell'>一月六日天下文化，举办字里行间的新书导读会。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/7.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/7.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>本次活动共计收到来自全球，六百余位新人的报名。</td>
+                    <td class='target-cell'>昏睡中，只见一名男子从张建强的背后，抡起铁锤狂砸。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/8.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/8.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>不料，冯二当场露出丑相，把那块宝石夺走了。</td>
+                    <td class='target-cell'>上半年，广东完成固定资产投资一点五五万亿元。</td>
+					<td><audio controls preload='none' src='audios/tts/ZH/prompt/9.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/9.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ZH/gt/9.wav'></audio></td>
+                </tr>
             </tbody>
         </table>
     </div>
-    <!-- You might want to add a disclaimer section here like in copyfrom.html -->
-    <!-- 
-    <div class='disclaimer' style="text-align: center; margin-top: 2rem;">
-        <p style="font-size: 0.9rem; color: #666; font-style: italic;">* Ground truth audio may contain background noise.</p>
+
+    <div id='spanish-content' class='model-content'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>XTTS-v1</th>
+					<th>XTTS-v2</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='prompt-cell'>Venus también se lleva a Eneas, vencido por Diomedes, en sus brazos blancos.</td>
+                    <td class='target-cell'>Y Aquiles amarraba cada mañana por los pies a su carro a Héctor, y le daba vuelta al monte tres veces.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/1.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Antonio se deslizó por la escotilla, esperando encontrarlo en la cala.</td>
+                    <td class='target-cell'>La barca se arrastró primero mansamente sobre la tranquila superficie de la bahía.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/2.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/2.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Y no dejaron de reírse del deseo de Sanchica, y más cuando Teresa dijo.</td>
+                    <td class='target-cell'>Si a este hombre le dejamos pasar libremente, mintió en su juramento, y, conforme a la ley, debe morir.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/3.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/3.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Aquiles quiere el cuerpo de Héctor, para quemarlo en los funerales de su amigo Patroclo.</td>
+                    <td class='target-cell'>Por eso hay en la Ilíada tantas descripciones de combates, y tantas curas de heridas, y tantas arengas.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/4.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/4.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Y por este motivo remontaba el Paraná hasta un obraje, con sus famosos strom.</td>
+                    <td class='target-cell'>No se alegren de mí mis enemigos injustos: Ni los que me aborrecen sin causa hagan del ojo.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/5.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/5.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Cuando las olas le levantaban, sacaba el cuerpo fuera para ver más lejos.</td>
+                    <td class='target-cell'>El compadre les esperaba en la barca preparando la vela.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/6.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/6.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Benincasa se observaba muy de cerca en los pies la placa lívida de la mordedura.</td>
+                    <td class='target-cell'>En todo tiempo tiene misericordia, y presta.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/7.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/7.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>De vez en cuando tirón y arriba un pez, que se revolvía y brillaba como estaño animado.</td>
+                    <td class='target-cell'>El viento soplaba fuerte y la barca cabeceaba rudamente sobre las olas de larga y profunda ondulación.</td>
+					<td><audio controls preload='none' src='audios/tts/ES/prompt/8.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ES/voicecraftx/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts1/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/xtts2/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/ES/gt/8.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    -->
+
+    <div id='french-content' class='model-content'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>XTTS-v1</th>
+					<th>XTTS-v2</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='prompt-cell'>JOCKEY-CLUB : Ses membres sont tous des jeunes gens farceurs et très riches.</td>
+                    <td class='target-cell'>Dire simplement le Jockey : très chic, donne à croire qu'on en fait partie.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/1.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Pour n'avoir pas voulu me lamenter, pleurer et descendre à toutes les bassesses auxquelles on vous a accoutumés.</td>
+                    <td class='target-cell'>Car, pour aggraver votre honte, ils m'appelleront sage, quoique je ne le sois point.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/2.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/2.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Cette fumée s'éleva jusqu'aux nues et s'étendant sur la mer et sur le rivage, forma un gros brouillard.</td>
+                    <td class='target-cell'>JASPE : Tous les vases des musées sont en jaspe.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/3.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/3.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Les deux enfants étaient une petite fille de six ans et un petit garçon de quatre ans.</td>
+                    <td class='target-cell'>Berthe était une petite fille très étourdie qui laissait toujours les portes ouvertes.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/4.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/4.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>L'enfant en sera quitte pour garder le lit trois jours.</td>
+                    <td class='target-cell'>Elle était grande pour son âge et avait la taille élancée.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/5.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/5.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>JEUNE FILLE : Articuler ce mot timidement.</td>
+                    <td class='target-cell'>Représentait un Cochon taquiné par des mouches.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/6.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/6.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Et moi, de mon côté, Athéniens, à quelle peine me condamnerai-je.</td>
+                    <td class='target-cell'>Et cet homme, ce serait probablement un cavalier ou un laboureur.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/7.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/7.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>JOCKEY : Déplorer la race des jockeys.</td>
+                    <td class='target-cell'>Seuls les romans historiques peuvent être tolérés parce qu'ils enseignent l'histoire.</td>
+					<td><audio controls preload='none' src='audios/tts/FR/prompt/8.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/FR/voicecraftx/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts1/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/xtts2/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/FR/gt/8.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id='german-content' class='model-content'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+					<th>Prompt</th>
+					<th class='voicecraftx'>VoiceCraft-X</th>
+					<th>XTTS-v1</th>
+					<th>XTTS-v2</th>
+                    <th>Ground Truth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='prompt-cell'>Friedlieb mit Christel Hartmann gewidmet.</td>
+                    <td class='target-cell'>Vor ihm auf der Bank lag ein altes Gebetbüchlein, in schwarzes Leder gebunden.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/1.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Das Schweigen der Nacht begann, wenn sie auch selbst noch zögerte, zu kommen.</td>
+                    <td class='target-cell'>Der weite Fabrikhof lag schweigend und menschenleer da, die Arbeiter hatten längst Feierabend gemacht.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/2.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/2.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Am Abend ist fast immer Vorstellung, und ich habe wohl kaum mehr zu steigernde Erfolge.</td>
+                    <td class='target-cell'>Löst man aber die Erfüllungen ein, erscheinen nachträglich auch die Versprechungen genau.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/3.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/3.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Sie soll bisweilen so stark geheizt haben, daß die Herdplatten zersprangen.</td>
+                    <td class='target-cell'>Sie machte ganz den Eindruck einer Hexe, mit der man Kinder graulich machen konnte.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/4.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/4.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Ich war von Herzen froh, dieser Gefahr überhoben zu sein und während meine Gefährten.</td>
+                    <td class='target-cell'>Glitzernd zieht sich der breite Strom vor uns dahin.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/5.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/5.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Der böse Busch wollte sie nicht wieder fortlassen!</td>
+                    <td class='target-cell'>Er machte zwar einen ziemlich weiten Bogen und war einsam.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/6.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/6.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Ich darf ihnen sagen, wir verhandeln mit den Mächten, auch mit ihrem Vaterland.</td>
+                    <td class='target-cell'>Und nun ängstigen Sie sich nicht, es wird alles gut werden.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/7.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/7.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/7.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>Und an Besuchen aus der Nachbarschaft und in die Nachbarschaft fehlt es uns nicht.</td>
+                    <td class='target-cell'>So will ich gleich mit einer allgemeinen Bemerkung anfangen.</td>
+					<td><audio controls preload='none' src='audios/tts/DE/prompt/8.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/DE/voicecraftx/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts1/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/xtts2/8.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/tts/DE/gt/8.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-
-<!-- New Section for Speech Editing Samples with Tabs -->
 <div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded" id="speech-editing-samples">
-    <h2 class="section-title">Speech Editing Samples</h2>
+    <h2 class="section-title">Speech Editing Samples (🤪Spot the Synthesis)</h2>
     <div class='model-tabs'>
-        <div id='english-tab' class='model-tab active' onclick='switchModelTab("english")'>English</div>
-        <div id='chinese-tab' class='model-tab' onclick='switchModelTab("chinese")'>Chinese</div>
-        <div id='spanish-tab' class='model-tab' onclick='switchModelTab("spanish")'>Spanish</div>
-        <!-- Add more language tabs here if needed -->
+        <div id='speech-editing-english-tab' class='model-tab active' onclick='switchModelTab("speech-editing-english")'>English</div>
+        <div id='speech-editing-chinese-tab' class='model-tab' onclick='switchModelTab("speech-editing-chinese")'>Chinese</div>
+        <div id='speech-editing-korean-tab' class='model-tab' onclick='switchModelTab("speech-editing-korean")'>Korean</div>
+        <div id='speech-editing-japanese-tab' class='model-tab' onclick='switchModelTab("speech-editing-japanese")'>Japanese</div>
+        <div id='speech-editing-spanish-tab' class='model-tab' onclick='switchModelTab("speech-editing-spanish")'>Spanish</div>
     </div>
 
-    <div id='english-content' class='model-content active'>
+    <div id='speech-editing-english-content' class='model-content active'>
         <table>
             <thead>
                 <tr>
-                    <th>Prompt Transcription</th>
-                    <th>Target Transcription</th>
-					<th>Prompt</th>
-					<th class='voicecraftx'>VoiceCraft-X</th>
-					<th>VoiceCraft</th>
-                    <th>Ground Truth</th>
+                    <th>Original Transcript</th>
+                    <th>Edited Transcript</th>
+                    <th>Original Audio</th>
+                    <th class='voicecraftx'>Edited Audio (VoiceCraft-X)</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Example Row for English -->
+                <!-- Example Interactive Row: Replace with actual data and audio paths -->
                 <tr>
-                    <td class='prompt-cell'>It is located on a small plain home to many vineyards.</td>
-                    <td class='target-cell'>The society of the day held that reward without labour was misguided.</td>
-					<td><audio controls preload='none' src='audios/tts/EN/prompt/1.wav'></audio></td>
-                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/EN/voicecraftx/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/xtts2/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/voicecraft/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/EN/gt/1.wav'></audio></td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        After all, who doesn't want to overcome new challenges and <s>achieve great heights</s>?
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        After all, who doesn't want to overcome new challenges and <b>succeed beyond measure</b>?
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/EN/prompt/1.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/EN/voicecraftx/1.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        He has also worked as a teacher, lecturer, critic and broadcaster.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        He has also worked <u><b>in various capacities</b></u> as a teacher, lecturer, critic and broadcaster.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/EN/prompt/2.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/EN/voicecraftx/2.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        Since work done is force times distance, mechanical power is <s>force times speed</s>.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        Since work done is force times distance, mechanical power is <b><u></u>the rate at which work is done</u></b>.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/EN/prompt/12.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/EN/voicecraftx/12.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>                
+            
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        Her cousin is a former member of the House of Representatives in Japan.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        Her cousin, <b><u>who resides in Tokyo</u></b>, is a former member of the House of Representatives in Japan.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/EN/prompt/7.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/EN/voicecraftx/7.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        His heart has been affected by his anxiety, and he has another heart attack.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        His heart has been affected by his anxiety, and he has another heart attack <b><u>requiring immediate medical attention</u></b>.
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/EN/prompt/6.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/EN/voicecraftx/6.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <div id='chinese-content' class='model-content active'>
+    <div id='speech-editing-chinese-content' class='model-content'>
         <table>
             <thead>
                 <tr>
-                    <th>Prompt Transcription</th>
-                    <th>Target Transcription</th>
-					<th>Prompt</th>
-					<th class='voicecraftx'>VoiceCraft-X</th>
-					<th>XTTS-v1</th>
-					<th>XTTS-v2</th>
-                    <th>Ground Truth</th>
+                    <th>Original Transcript</th>
+                    <th>Edited Transcript</th>
+                    <th>Original Audio</th>
+                    <th class='voicecraftx'>Edited Audio (VoiceCraft-X)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class='prompt-cell'>柏林围墙崩垮后，德国企业在俄国大笔投资。</td>
-                    <td class='target-cell'>本次有害昆虫科普展，是一场专门为孩子准备的科普教育活动。</td>
-					<td><audio controls preload='none' src='audios/tts/ZH/prompt/1.wav'></audio></td>
-                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/tts/ZH/voicecraftx/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/ZH/xtts1/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/ZH/xtts2/1.wav'></audio></td>
-                    <td><audio controls preload='none' src='audios/tts/ZH/gt/1.wav'></audio></td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        照片中李弘基和张根硕两人站在中间，做<s>可爱咧嘴状</s>。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        照片中李弘基和张根硕两人站在中间，做<b>调皮的微笑</b>。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/ZH/prompt/1.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/ZH/voicecraftx/1.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        毒虫把毒品丢进马桶冲走，未料毒品又浮出水面，让警方逮个正着。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        毒虫把毒品丢进马桶冲走，未料<b><u>令人啼笑皆非的是</u></b>，毒品又浮出水面，让警方逮个正着。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/ZH/prompt/11.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/ZH/voicecraftx/11.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        在半决赛，美国女排<s>险胜</s>古巴闯入决赛，最终收获银牌。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        在半决赛，美国女排<b>经过苦战击败</b>古巴闯入决赛，最终收获银牌。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/ZH/prompt/3.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/ZH/voicecraftx/3.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        你可以学习一下中国跳棋或者军棋，这两个容易多了。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        你可以<b><u>试着</u></b>学习一下中国跳棋或者军棋，这两个<b><u>游戏的规则</u></b>容易多了。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/ZH/prompt/9.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/ZH/voicecraftx/9.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        最便捷的方法，就是用纱窗将蚊子阻止在屋外。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        最便捷的方法，就是用纱窗将那些烦人的蚊子阻止在屋外。
+                    </td>
+                    <td class='details-cell' style='visibility: hidden;'>
+                        <audio controls preload='none' src='audios/editing/ZH/prompt/10.wav'></audio>
+                    </td>
+                    <td class='voicecraftx-cell interactive-cell' onclick='toggleSpeechEditingDetails(this)'>
+                        <audio controls preload='none' src='audios/editing/ZH/voicecraftx/10.wav' onclick="event.stopPropagation()"></audio>
+                        <div class='toggle-icon'>&#9660; Show Details</div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- You might want to add a disclaimer section here like in copyfrom.html -->
-    <!-- 
-    <div class='disclaimer' style="text-align: center; margin-top: 2rem;">
-        <p style="font-size: 0.9rem; color: #666; font-style: italic;">* Ground truth audio may contain background noise.</p>
+    <div id='speech-editing-korean-content' class='model-content'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Original Transcript</th>
+                    <th>Edited Transcript</th>
+                    <th>Original Audio</th>
+                    <th class='voicecraftx'>Edited Audio (VoiceCraft-X)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" style="text-align:center; padding: 2rem;">
+                        Korean speech editing samples coming soon... (When adding, use the interactive row structure as shown for English).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    -->
+    <div id='speech-editing-japanese-content' class='model-content'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Original Transcript</th>
+                    <th>Edited Transcript</th>
+                    <th>Original Audio</th>
+                    <th class='voicecraftx'>Edited Audio (VoiceCraft-X)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" style="text-align:center; padding: 2rem;">
+                        Japanese speech editing samples coming soon... (When adding, use the interactive row structure as shown for English).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id='speech-editing-spanish-content' class='model-content'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Original Transcript</th>
+                    <th>Edited Transcript</th>
+                    <th>Original Audio</th>
+                    <th class='voicecraftx'>Edited Audio (VoiceCraft-X)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" style="text-align:center; padding: 2rem;">
+                        Spanish speech editing samples coming soon... (When adding, use the interactive row structure as shown for English).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">		
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded" id="code-switch-samples">
+    <h2 class="section-title">Code-Switching Samples</h2>
+    <div class='model-tabs'>
+        <div id='code-switch-chinese-english-tab' class='model-tab active' onclick='switchModelTab("code-switch-chinese-english")'>Chinese-English</div>
+        <div id='code-switch-spanish-english-tab' class='model-tab' onclick='switchModelTab("code-switch-spanish-english")'>Spanish-English</div>
+        <div id='code-switch-french-english-tab' class='model-tab' onclick='switchModelTab("code-switch-french-english")'>French-English</div>
+    </div>
+
+    <div id='code-switch-chinese-english-content' class='model-content active'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prompt Transcription</th>
+                    <th>Target Transcription</th>
+                    <th>Prompt</th>
+                    <th class='voicecraftx'>VoiceCraft-X</th>
+                    <th class='voicecraftx'>VoiceCraft-X (10h fine-tuning)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Placeholder for Chinese-English code-switching samples -->
+                <tr>
+                    <td class='prompt-cell'>Hundreds must have seen it, and taken it for a falling star.</td>
+                    <td class='target-cell'>Block chain是一个非常复杂的技术因为我当时在网上搜了很久。</td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/prompt/1.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/switch/zh-en/voicecraftx/1.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/voicecraftx-10h/1.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>He was dressed in a tunic of flowers, which set off his graceful and well formed figure to advantage.</td>
+                    <td class='target-cell'>我的undergraduate的时候学的major也是。</td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/prompt/5.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/switch/zh-en/voicecraftx/5.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/voicecraftx-10h/5.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>She looked at his heavy shoulders and big, determined head, thrust forward like a catapult in leash.</td>
+                    <td class='target-cell'>我也是差不多大二就有这种想法但是当时一直没想清楚自己为什么要出国。</td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/prompt/6.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/switch/zh-en/voicecraftx/6.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/voicecraftx-10h/6.wav'></audio></td>
+                </tr>
+
+
+                <tr>
+                    <td class='prompt-cell'>如果儿子说是我的，他就立刻还给儿子。</td>
+                    <td class='target-cell'>我同意就是self driving car它是一个非常high standard的那个technique.</td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/prompt/2.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/switch/zh-en/voicecraftx/2.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/voicecraftx-10h/2.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>这两句魔语可以让故事里的小熊走出来。</td>
+                    <td class='target-cell'>是特别不好掌控那个就是你bracket的balance.</td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/prompt/3.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/switch/zh-en/voicecraftx/3.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/voicecraftx-10h/3.wav'></audio></td>
+                </tr>
+                <tr>
+                    <td class='prompt-cell'>小黄豆，你不认识我们啦，我们都是爷爷的子孙呀。</td>
+                    <td class='target-cell'>But it's not that technical actually with more related to business and economics.</td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/prompt/4.wav'></audio></td>
+                    <td class='voicecraftx-cell'><audio controls preload='none' src='audios/switch/zh-en/voicecraftx/4.wav'></audio></td>
+                    <td><audio controls preload='none' src='audios/switch/zh-en/voicecraftx-10h/4.wav'></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
 	<h2 id="model-overview" style="text-align: center;">System Overview</h2>
 	<body>
 	<p style="text-align: center;">
@@ -408,20 +1032,111 @@
 
 <script>
     function switchModelTab(tabName) {
-        // Hide all content
-        document.querySelectorAll('.model-content').forEach(content => {
+        let sectionId;
+        // Determine the parent section ID based on the tabName
+        if (tabName.startsWith('speech-editing-')) {
+            sectionId = 'speech-editing-samples';
+        } else if (tabName.startsWith('code-switch-')) {
+            sectionId = 'code-switch-samples';
+        } else {
+            sectionId = 'zero-shot-samples';
+        }
+
+        const sectionElement = document.getElementById(sectionId);
+        if (!sectionElement) {
+            console.error("Section not found for tab:", tabName, "with section ID:", sectionId);
+            return;
+        }
+
+        // Hide all content within this section
+        sectionElement.querySelectorAll('.model-content').forEach(content => {
             content.classList.remove('active');
         });
         
-        // Deactivate all tabs
-        document.querySelectorAll('.model-tab').forEach(tab => {
+        // Deactivate all tabs within this section
+        sectionElement.querySelectorAll('.model-tab').forEach(tab => {
             tab.classList.remove('active');
         });
         
         // Show selected content and activate tab
-        document.getElementById(tabName + '-content').classList.add('active');
-        document.getElementById(tabName + '-tab').classList.add('active');
+        const contentElement = document.getElementById(tabName + '-content');
+        const tabElement = document.getElementById(tabName + '-tab');
+
+        if (contentElement) {
+            contentElement.classList.add('active');
+        } else {
+            console.error("Content element not found:", tabName + '-content');
+        }
+        if (tabElement) {
+            tabElement.classList.add('active');
+        } else {
+            console.error("Tab element not found:", tabName + '-tab');
+        }
+
+        // Store the active tab in localStorage
+        if (tabName.startsWith('speech-editing-')) {
+            localStorage.setItem('activeSpeechEditingTab', tabName);
+        } else if (tabName.startsWith('code-switch-')) {
+            localStorage.setItem('activeCodeSwitchTab', tabName);
+        } else {
+            localStorage.setItem('activeTTSTab', tabName);
+        }
     }
+
+    function toggleSpeechEditingDetails(triggerElement) {
+        const row = triggerElement.parentElement; // Get the <tr>
+        const detailCells = [
+            row.children[0], // Original Transcript cell
+            row.children[1], // Edited Transcript cell
+            row.children[2]  // Original Audio cell
+        ];
+        const icon = triggerElement.querySelector('.toggle-icon');
+        let nowVisible = false;
+
+        detailCells.forEach(cell => {
+            if (cell) { // Check if cell exists
+                if (cell.style.visibility === 'hidden' || cell.style.visibility === '') {
+                    cell.style.visibility = 'visible';
+                    nowVisible = true;
+                } else {
+                    cell.style.visibility = 'hidden';
+                }
+            }
+        });
+
+        if (icon) {
+            if (nowVisible) {
+                icon.innerHTML = '&#9650; Hide Details';
+            } else {
+                icon.innerHTML = '&#9660; Show Details';
+            }
+        }
+    }
+
+    // Function to restore tab states on page load
+    function restoreTabStates() {
+        const activeTTSTab = localStorage.getItem('activeTTSTab');
+        if (activeTTSTab) {
+            // switchModelTab will handle deactivating the default HTML active tab
+            // and activating the stored tab within the correct section.
+            switchModelTab(activeTTSTab);
+        }
+
+        const activeSpeechEditingTab = localStorage.getItem('activeSpeechEditingTab');
+        if (activeSpeechEditingTab) {
+            // switchModelTab will handle deactivating the default HTML active tab
+            // and activating the stored tab within the correct section.
+            switchModelTab(activeSpeechEditingTab);
+        }
+
+        const activeCodeSwitchTab = localStorage.getItem('activeCodeSwitchTab');
+        if (activeCodeSwitchTab) {
+            switchModelTab(activeCodeSwitchTab);
+        }
+    }
+
+    // Call restoreTabStates when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', restoreTabStates);
 </script>
 
 </body>
